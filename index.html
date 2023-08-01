@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odin Library</title>
+    <link rel="stylesheet" href="style.css"></link>
+</head>
+<body>
+    <form method="post">
+        <h1>Add a book</h1>
+        <div>
+            <label for="author">
+                <span>Author: </span>
+                <input type="text" name="author" id="author"></input>
+            </label>
+        </div>
+        <div>
+            <label for="title">
+                <span>Title: </span>
+                <input type="text" name="title" id="title"></input>
+            </label>
+        </div>
+        
+        <div>
+            <label for="pages">
+                <span># of pages: </span>
+                <input type="text" name="pages" id="pages"></input>
+            </label>
+        </div>
+        <div>
+            <label for="read"> 
+                <span>Read: </span>
+                <input type="checkbox" name="read" id="read" value="true"></input>
+            </label>
+        </div>
+        <div>
+            <label for="">
+
+            </label>
+        </div>
+        <button id="submitBtn" type="submit">Submit</button>
+    </form>
+
+    <div id="catalog"></div>
+
+    <script>
+        let myLibrary = [];
+
+        // dummy objects, didn't implement the 'add book' feature yet
+        let book1 = new Book("Sam", "Undertale", 200, true);
+        let book2 = new Book("Max", "Final Fintasy", 250, false);
+        let book3 = new Book("Dan", "Assassination Classroom", 100, true);
+        myLibrary = [book1, book2, book3];
+        reloadCatalog();
+
+        const btn = document.querySelector("#submitBtn");
+        btn.addEventListener("click", () => {
+            event.preventDefault();
+            let author = document.querySelector('#author').value;
+            let title = document.querySelector('#title').value;
+            let pages = document.querySelector('#pages').value;
+            let read = document.querySelector('#read').value;
+            
+            addBookToLibrary(myLibrary, author, title, pages, read);
+            reloadCatalog();
+        });
+
+        // the constructor
+        function Book(author, title, pages, read) {
+            this.author = author;
+            this.title = title;
+            this.pages = pages;
+            this.read = read;        
+        }
+
+        function addBookToLibrary(library, author, title, pages, read) {
+            let book = new Book(author, title, pages, read);
+            myLibrary.push(book);
+        }
+
+        function reloadCatalog() {
+            let catalog = document.getElementById('catalog');
+            for (let book of myLibrary) { // cool way of illerating through an array
+                let block = document.createElement("div");
+                block.innerText = `${book.title} by ${book.author}, ${book.pages} pages, ${book.read ? 'read' : 'not read yet'}`; 
+                catalog.appendChild(block);
+            }
+        }
+
+        
+
+
+
+
+
+        
+
+    </script>
+</body>
+</html>
