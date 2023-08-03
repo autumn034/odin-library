@@ -7,42 +7,44 @@
     <link rel="stylesheet" href="style.css"></link>
 </head>
 <body>
-    <form method="post">
-        <h1>Add a book</h1>
-        <div>
-            <label for="author">
-                <span>Author: </span>
-                <input type="text" name="author" id="author"></input>
-            </label>
-        </div>
-        <div>
-            <label for="title">
-                <span>Title: </span>
-                <input type="text" name="title" id="title"></input>
-            </label>
-        </div>
-        
-        <div>
-            <label for="pages">
-                <span># of pages: </span>
-                <input type="text" name="pages" id="pages"></input>
-            </label>
-        </div>
-        <div>
-            <label for="read"> 
-                <span>Read: </span>
-                <input type="checkbox" name="read" id="read" value="true"></input>
-            </label>
-        </div>
-        <div>
-            <label for="">
+    <div class="app">
+        <form method="post">
+            <div class="form-container">
+                <div>
+                    <label for="author">
+                        Author<br>
+                        <input type="text" name="author" id="author"></input>
+                    </label>
+                    
+                </div>
+                <div>
+                    <label for="title">
+                        Title<br>
+                        <input type="text" name="title" id="title"></input>
+                    </label>
+                </div>
+                
+                <div>
+                    <label for="pages">
+                        # of pages<br>
+                        <input type="text" name="pages" id="pages"></input>
+                    </label>
+                </div>
+                <div>
+                    <label for="read"> 
+                        Read<br>
+                        <input type="checkbox" name="read" id="read" value="true"></input>
+                    </label>
+                </div>
+                <button id="submitBtn" type="submit">Submit</button>
+            </div>
 
-            </label>
-        </div>
-        <button id="submitBtn" type="submit">Submit</button>
-    </form>
-
-    <div id="catalog"></div>
+            
+        </form>
+    
+        <div id="catalog"></div>
+    </div>
+   
 
     <script>
         let myLibrary = [];
@@ -82,8 +84,11 @@
         function reloadCatalog() {
             let catalog = document.getElementById('catalog');
             for (let book of myLibrary) { // cool way of illerating through an array
-                let block = document.createElement("div");
+                let block = document.createElement("div");                
+                let closeBtn =  document.createElement("button");
+                closebtn.value = "1";                
                 block.innerText = `${book.title} by ${book.author}, ${book.pages} pages, ${book.read ? 'read' : 'not read yet'}`; 
+                block.appendChild(closeBtn);
                 catalog.appendChild(block);
             }
         }

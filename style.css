@@ -1,0 +1,17 @@
+.app {
+    width: 768px;
+    margin: auto;
+    margin-top: 128px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.form-container {
+    display: flex;
+    gap: 8px;
+}
+
+button {
+    background-color: white;
+    border: solid 1px grey;
+    font-family: 'Courier New', Courier, monospace;
+}
