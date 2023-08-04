@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="app">
-        <form method="post">
+        <form >
             <div class="form-container">
                 <div>
                     <label for="author">
@@ -50,11 +50,9 @@
         let myLibrary = [];
 
         // dummy objects, didn't implement the 'add book' feature yet
-        let book1 = new Book("Sam", "Undertale", 200, true);
-        let book2 = new Book("Max", "Final Fintasy", 250, false);
-        let book3 = new Book("Dan", "Assassination Classroom", 100, true);
-        myLibrary = [book1, book2, book3];
-        reloadCatalog();
+        addBookToLibrary("Sam", "Undertale", 200, true);
+        addBookToLibrary("Max", "Final Fintasy", 250, false);
+        addBookToLibrary("Dan", "Assassination Classroom", 100, true);
 
         const btn = document.querySelector("#submitBtn");
         btn.addEventListener("click", () => {
@@ -64,8 +62,7 @@
             let pages = document.querySelector('#pages').value;
             let read = document.querySelector('#read').value;
             
-            addBookToLibrary(myLibrary, author, title, pages, read);
-            reloadCatalog();
+            addBookToLibrary(author, title, pages, read);
         });
 
         // the constructor
@@ -76,21 +73,23 @@
             this.read = read;        
         }
 
-        function addBookToLibrary(library, author, title, pages, read) {
+        function addBookToLibrary(author, title, pages, read) {
             let book = new Book(author, title, pages, read);
             myLibrary.push(book);
-        }
 
-        function reloadCatalog() {
             let catalog = document.getElementById('catalog');
-            for (let book of myLibrary) { // cool way of illerating through an array
-                let block = document.createElement("div");                
-                let closeBtn =  document.createElement("button");
-                closebtn.value = "1";                
-                block.innerText = `${book.title} by ${book.author}, ${book.pages} pages, ${book.read ? 'read' : 'not read yet'}`; 
-                block.appendChild(closeBtn);
-                catalog.appendChild(block);
-            }
+            let divContainer = document.createElement("div");
+            let closeBtn = document.createElement("button");
+            closeBtn.value = myLibrary.length - 1;
+            closeBtn.innerText = "x";
+
+            divContainer.innerText = `${title} by ${author}, ${pages} pages, ${read ? 'read' : 'not read yet'} `; 
+            divContainer.appendChild(closeBtn);
+            catalog.appendChild(divContainer);
+
+            closeBtn.addEventListener("click", (e) => {
+                    e.target.parentNode.remove();
+                });
         }
 
         
