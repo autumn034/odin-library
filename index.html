@@ -54,8 +54,8 @@
         addBookToLibrary("Max", "Final Fintasy", 250, false);
         addBookToLibrary("Dan", "Assassination Classroom", 100, true);
 
-        const btn = document.querySelector("#submitBtn");
-        btn.addEventListener("click", () => {
+        const submitButton = document.querySelector("#submitBtn");
+        submitButton.addEventListener("click", () => {
             event.preventDefault();
             let author = document.querySelector('#author').value;
             let title = document.querySelector('#title').value;
