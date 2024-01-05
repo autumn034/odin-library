@@ -10,6 +10,10 @@
     gap: 8px;
 }
 
+.form-container input:invalid {
+    border: 1px solid #ff0000;
+}
+
 button {
     background-color: white;
     border: solid 1px grey;

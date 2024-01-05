@@ -6,109 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin Library</title>
     <link rel="stylesheet" href="style.css">
-    </link>
+    <script src="script.js" defer></script>
+
 </head>
 
 <body>
     <div class="app">
-        <form>
-            <div class="form-container">
-                <div>
-                    <label for="author">Author</label>
-                    <input type="text" name="author" id="author"></input>
-                </div>
-                <div>
-                    <label for="title">Title</label>
-                    <input type="text" name="title" id="title"></input>
-                </div>
-                <div>
-                    <label for="pages"># of pages</label>
-                    <input type="text" name="pages" id="pages"></input>
-                </div>
-                <div>
-                    <label for="read">Read</label>
-                    <input type="checkbox" name="read" id="read" value="true"></input>
-                </div>
-                <button id="submitBtn" type="submit">Submit</button>
+        <form id="formContainer" class="form-container">
+            <div>
+                <label for="author">Author</label>
+                <input type="text" name="author" id="author" required pattern="[A-Za-z ]+"></input>
             </div>
+            <div>
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" required pattern="[A-Za-z ]+"></input>
+            </div>
+            <div>
+                <label for="pages"># of pages</label>
+                <input type="text" name="pages" id="pages" required pattern="[0-9]+"></input>
+            </div>
+            <div>
+                <label for="read">Read</label>
+                <input type="checkbox" name="read" id="read"></input>
+            </div>
+            <button id="submitBtn" type="submit">Submit</button>
         </form>
 
         <div id="catalog"></div>
     </div>
-
-
-    <script>
-        class Book {
-            constructor(author, title, pages, read) {
-                this.author = author;
-                this.title = title;
-                this.pages = pages;
-                this.read = read;
-            }
-        }
-
-        let myLibrary = [];
-
-        // dummy objects, didn't implement the 'add book' feature yet
-        addBookToLibrary("Sam", "Undertale", 200, true);
-        addBookToLibrary("Max", "Final Fintasy", 250, false);
-        addBookToLibrary("Dan", "Assassination Classroom", 100, true);
-
-        const submitButton = document.querySelector("#submitBtn");
-        submitButton.addEventListener("click", () => {
-            event.preventDefault();
-            let author = document.querySelector('#author').value;
-            let title = document.querySelector('#title').value;
-            let pages = document.querySelector('#pages').value;
-            let read = document.querySelector('#read').value;
-
-            addBookToLibrary(author, title, pages, read);
-        });
-
-        // the constructor
-
-
-        function addBookToLibrary(author, title, pages, read) {
-            let book = new Book(author, title, pages, read);
-            myLibrary.push(book);
-
-            let catalog = document.getElementById('catalog');
-            let divContainer = document.createElement("div");
-            let closeBtn = document.createElement("button");
-            let readBtn = document.createElement("button");
-
-            readBtn.innerText = `${read ? 'Read' : 'Not Read'}`;
-            readBtn.value = myLibrary.length - 1;
-
-            closeBtn.value = myLibrary.length - 1;
-            closeBtn.innerText = "x";
-
-            divContainer.innerText = `${title} by ${author}, ${pages} pages, ${read ? 'read' : 'not read yet'} `;
-            divContainer.appendChild(readBtn);
-            divContainer.appendChild(closeBtn);
-            catalog.appendChild(divContainer);
-
-            closeBtn.addEventListener("click", (e) => {
-                e.target.parentNode.remove();
-            });
-
-            readBtn.addEventListener("click", (e) => {
-                let index = e.target.value; // gets the index of the element corresponding to the read button                
-                myLibrary[index].read = myLibrary[index].read ? false : true;
-                e.target.innerText = `${myLibrary[index].read ? 'Read' : 'Not Read'}`;
-
-            });
-        }
-
-
-
-
-
-
-
-
-
-    </script>
 </body>
 
 </html>
